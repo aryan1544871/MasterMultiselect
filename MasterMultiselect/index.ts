@@ -304,7 +304,7 @@ export class MasterMultiselect implements ComponentFramework.StandardControl<IIn
 				
 			}
 		}
-		
+		/*Aryan*/
 		//this.dropDownControl.disabled=this.isDisabled;
 		var string="";
 		this.currentValue="";
