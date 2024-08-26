@@ -133,8 +133,6 @@
    background-color: #6e6ef1; /* Set the color to red */
    }
 
-::before {}
-
 .hdnOptionSelected{
     font-size: 1.0rem;
    font-weight:400;
