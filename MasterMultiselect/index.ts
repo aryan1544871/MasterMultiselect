@@ -297,14 +297,13 @@ export class MasterMultiselect implements ComponentFramework.StandardControl<IIn
 				}
 				optionDiv.appendChild(select);
 				optionDiv.appendChild(span);
-				optionDiv.addEventListener("mouseenter", this.onSelectEnter.bind(this, optionDiv));
-				optionDiv.addEventListener("mouseleave", this.onSelectLeave.bind(this,optionDiv));
+				//optionDiv.addEventListener("mouseenter", this.onSelectEnter.bind(this, optionDiv));
+				//optionDiv.addEventListener("mouseleave", this.onSelectLeave.bind(this,optionDiv));
 				optionDiv.addEventListener("click",this.onSelectClick.bind(this,optionDiv));
 				this.selectContainer.appendChild(optionDiv);
 				
 			}
 		}
-		/*Aryan*/
 		//this.dropDownControl.disabled=this.isDisabled;
 		var string="";
 		this.currentValue="";
