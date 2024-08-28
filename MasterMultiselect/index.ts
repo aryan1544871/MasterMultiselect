@@ -224,7 +224,6 @@ export class MasterMultiselect implements ComponentFramework.StandardControl<IIn
 			var MasterAttribute = masterAttribute;
 			var a = await this.getAttributes(entity);
 			var result = JSON.parse(a);
-			console.log(result);
 			var options: IMultipleOption[]=[];
 			var selectedItems:string[]=[];
 			if (this.currentValue!=="" && typeof(this.currentValue)!=="undefined"){
@@ -235,10 +234,8 @@ export class MasterMultiselect implements ComponentFramework.StandardControl<IIn
 				
 				if (result.value[i][MasterAttribute]!== null) {
 					var key=result.value[i][MasterAttribute];
-					console.log(key);
 					var checked:boolean=false;
 					var text = result.value[i][MasterAttribute];
-					console.log(text);
 
 					if (selectedItems.includes(key)){
 						checked=true;
@@ -247,7 +244,6 @@ export class MasterMultiselect implements ComponentFramework.StandardControl<IIn
 					}
 					
 					var option: IMultipleOption = { key: key, text: text, checked:checked }
-					console.log(option);
 					options.push(option);
 					
 				}
