@@ -206,11 +206,11 @@ export class MasterMultiselect implements ComponentFramework.StandardControl<IIn
 			var string="";
 			this.currentValue="";
 			for (var i=0; i<this.currentValues.length; i++){
-				string=string+this.currentValues[i].text+", ";
-				this.currentValue=this.currentValue+this.currentValues[i].key+", ";
+				string=string+this.currentValues[i].text+",";
+				this.currentValue=this.currentValue+this.currentValues[i].key+",";
 			}
-			this.resultDiv.innerHTML=string.slice(0,-2);
-			this.currentValue=this.currentValue.slice(0,-2);
+			this.resultDiv.innerHTML=string.slice(0,-1);
+			this.currentValue=this.currentValue.slice(0,-1);
 			this.notifyOutputChanged();
 			}
 		}
@@ -227,7 +227,7 @@ export class MasterMultiselect implements ComponentFramework.StandardControl<IIn
 			var options: IMultipleOption[]=[];
 			var selectedItems:string[]=[];
 			if (this.currentValue!=="" && typeof(this.currentValue)!=="undefined"){
-				selectedItems=this.currentValue.split(", ");
+				selectedItems=this.currentValue.split(",");
 			}
 			// format all the options into a usable record
 			for (var i = 0; i < result.value.length; i++) {
@@ -304,11 +304,11 @@ export class MasterMultiselect implements ComponentFramework.StandardControl<IIn
 		var string="";
 		this.currentValue="";
 		for (i=0; i<this.currentValues.length; i++){
-			string=string+this.currentValues[i].text+", ";
-			this.currentValue=this.currentValue+this.currentValues[i].key+", ";
+			string=string+this.currentValues[i].text+",";
+			this.currentValue=this.currentValue+this.currentValues[i].key+",";
 		}
-		this.resultDiv.innerHTML=string.slice(0,-2);
-		this.currentValue=this.currentValue.slice(0,-2);
+		this.resultDiv.innerHTML=string.slice(0,-1);
+		this.currentValue=this.currentValue.slice(0,-1);
 		
 	}
 
