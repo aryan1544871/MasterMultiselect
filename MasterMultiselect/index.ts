@@ -58,6 +58,10 @@ export class MasterMultiselect implements ComponentFramework.StandardControl<IIn
 		comboBoxContainer.appendChild(this.resultDiv);
 		comboBoxContainer.appendChild(this.dropdownDiv);
         container.appendChild(comboBoxContainer); 
+		var isPropertyLoading = context.parameters.Attribute.isPropertyLoading;
+		if(isPropertyLoading){
+			window.location.reload();
+		}
 	}
 
 
