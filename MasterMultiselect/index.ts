@@ -14,6 +14,7 @@ export class MasterMultiselect implements ComponentFramework.StandardControl<IIn
 	}
 	private notifyOutputChanged: () => void;
 	private currentValue: string | undefined;
+	private filteringValue: number | null;
 	private dropdownDiv:HTMLDivElement;
 	private selectContainer:HTMLDivElement;
 	entity:string="";
@@ -59,7 +60,8 @@ export class MasterMultiselect implements ComponentFramework.StandardControl<IIn
 		comboBoxContainer.appendChild(this.dropdownDiv);
         container.appendChild(comboBoxContainer); 
 		var isPropertyLoading = context.parameters.Attribute.isPropertyLoading;
-		if(isPropertyLoading){
+		var isPropertyLoadingFilteringValue = context.parameters.FilteringAttribute.isPropertyLoading;
+		if(isPropertyLoading && isPropertyLoadingFilteringValue){
 			window.location.reload();
 		}
 	}
@@ -74,9 +76,11 @@ export class MasterMultiselect implements ComponentFramework.StandardControl<IIn
 		this.isDisabled=this.context.mode.isControlDisabled;
 		var	entity=context.parameters.EntityName.raw||"";	
 		var masterAttribute = context.parameters.AttributeName.raw||"";
+		var masterfilterID = context.parameters.MasterFilterIDName.raw || "";
 		if (entity!==this.entity && entity!==""){
 			if (this.firstRun){
 				this.currentValue=context.parameters.Attribute.raw||"";
+				this.filteringValue = context.parameters.FilteringAttribute.raw|| null;
 				this.firstRun=false;
 			}
 			else {
@@ -85,7 +89,7 @@ export class MasterMultiselect implements ComponentFramework.StandardControl<IIn
 			}
 			// time to retrive the actual results from the system.
 			this.entity=entity ;		
-			this.populateComboBox(entity,masterAttribute)	
+			this.populateComboBox(entity,masterAttribute,masterfilterID)	
 		}	
 	}
 
@@ -221,35 +225,58 @@ export class MasterMultiselect implements ComponentFramework.StandardControl<IIn
 	}
    
 
-	private async populateComboBox(entity:string, masterAttribute:string) {
+	private async populateComboBox(entity:string, masterAttribute:string,masterfilterID:string) {
 
 		let optionDiv = document.createElement("div");
 		if (entity!==""){
 			var MasterAttribute = masterAttribute;
 			var a = await this.getAttributes(entity);
 			var result = JSON.parse(a);
+			var filteredresult = result.value.filter((item: any) => item[masterfilterID] === this.filteringValue);
 			var options: IMultipleOption[]=[];
 			var selectedItems:string[]=[];
 			if (this.currentValue!=="" && typeof(this.currentValue)!=="undefined"){
 				selectedItems=this.currentValue.split(",");
 			}
+			if(this.filteringValue === null){
 			// format all the options into a usable record
-			for (var i = 0; i < result.value.length; i++) {
-				
-				if (result.value[i][MasterAttribute]!== null) {
-					var key=result.value[i][MasterAttribute];
-					var checked:boolean=false;
-					var text = result.value[i][MasterAttribute];
+				for (var i = 0; i < result.value.length; i++) {
+					
+					if (result.value[i][MasterAttribute]!== null) {
+						var key=result.value[i][MasterAttribute];
+						var checked:boolean=false;
+						var text = result.value[i][MasterAttribute];
 
-					if (selectedItems.includes(key)){
-						checked=true;
+						if (selectedItems.includes(key)){
+							checked=true;
+							var option: IMultipleOption = { key: key, text: text, checked:checked }
+							this.currentValues.push(option);
+						}
+						
 						var option: IMultipleOption = { key: key, text: text, checked:checked }
-						this.currentValues.push(option);
+						options.push(option);
+						
 					}
+				}
+			}
+			else{
+				for (var i = 0; i < filteredresult.length; i++) {
 					
-					var option: IMultipleOption = { key: key, text: text, checked:checked }
-					options.push(option);
-					
+					if (filteredresult[i][MasterAttribute]!== null) {
+						var key= filteredresult[i][MasterAttribute];
+						var checked:boolean=false;
+						var text = filteredresult[i][MasterAttribute];
+
+						if (selectedItems.includes(key)){
+							checked=true;
+							var option: IMultipleOption = { key: key, text: text, checked:checked }
+							this.currentValues.push(option);
+						}
+						
+						var option: IMultipleOption = { key: key, text: text, checked:checked }
+						options.push(option);
+						
+					}
 				}
 			}
 			// sort the items into alphabetical order by text.

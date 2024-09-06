@@ -3,17 +3,18 @@
   <control namespace="CustomComponent" constructor="MasterMultiselect" version="0.0.1" display-name-key="MasterMultiselect" description-key="A Multiselect Entity Attributes Metadata Option Set" control-type="standard">
     <property name="Attribute" display-name-key="Attribute" description-key="Field to populate multioptionset value of master table" of-type="SingleLine.Text" usage="bound" required="true" />
     <property name="EntityName" display-name-key="Master Entity Plural Name" description-key="The logical name of the Master Entity " of-type="SingleLine.Text" usage="input" required="true" />  
-  <property name="AttributeName" display-name-key="Master Attribute Name" description-key="The logical name of the Attribute of Master Entity which is to be deplayed as multioptionset value" of-type="SingleLine.Text" usage="input" required="true" />
-    
-    <resources>
-      <code path="index.ts" order="1"/>
-      <css path="css/MasterMultiselect.css" order="1" />
-      <img path="img/DownArrowTransparent.png" />
-      <img path="img/DownArrowTransparent2.png" />
-    </resources>
-    <feature-usage>
-      <uses-feature name="Utility" required="true" />
-      <uses-feature name="WebAPI" required="true" />
-    </feature-usage>
+    <property name="AttributeName" display-name-key="Master Attribute Name" description-key="The logical name of the Attribute of Master Entity which is to be deplayed as multioptionset value" of-type="SingleLine.Text" usage="input" required="true" />
+    <property name="FilteringAttribute" display-name-key="Filtering Attribute" description-key="Defines which options to show in dropdown " of-type="OptionSet" usage="bound" required="false" />
+    <property name="MasterFilterIDName" display-name-key="Master Filter ID Name" description-key="The logical name of the Attribute defined in Master Entity for filtering records " of-type="SingleLine.Text" usage="input" required="false" />
+      <resources>
+        <code path="index.ts" order="1"/>
+        <css path="css/MasterMultiselect.css" order="1" />
+        <img path="img/DownArrowTransparent.png" />
+        <img path="img/DownArrowTransparent2.png" />
+      </resources>
+      <feature-usage>
+        <uses-feature name="Utility" required="true" />
+        <uses-feature name="WebAPI" required="true" />
+      </feature-usage>
   </control>
 </manifest>
