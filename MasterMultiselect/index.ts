@@ -15,6 +15,7 @@ export class MasterMultiselect implements ComponentFramework.StandardControl<IIn
 	private notifyOutputChanged: () => void;
 	private currentValue: string | undefined;
 	private filteringValue: number | null;
+	private filteringValuePrevious : number | null;
 	private dropdownDiv:HTMLDivElement;
 	private selectContainer:HTMLDivElement;
 	entity:string="";
@@ -64,6 +65,7 @@ export class MasterMultiselect implements ComponentFramework.StandardControl<IIn
 		if(isPropertyLoading && isPropertyLoadingFilteringValue){
 			window.location.reload();
 		}
+		this.filteringValuePrevious = context.parameters.FilteringAttribute.raw|| null;
 	}
 
 
@@ -77,19 +79,14 @@ export class MasterMultiselect implements ComponentFramework.StandardControl<IIn
 		var	entity=context.parameters.EntityName.raw||"";	
 		var masterAttribute = context.parameters.AttributeName.raw||"";
 		var masterfilterID = context.parameters.MasterFilterIDName.raw || "";
-		if (entity!==this.entity && entity!==""){
-			if (this.firstRun){
-				this.currentValue=context.parameters.Attribute.raw||"";
-				this.filteringValue = context.parameters.FilteringAttribute.raw|| null;
-				this.firstRun=false;
-			}
-			else {
-				this.currentValue="";
-				this.currentValues=[];
-			}
+		this.currentValue=context.parameters.Attribute.raw||"";
+		this.filteringValue = context.parameters.FilteringAttribute.raw|| null;
+
+		if ((entity!==this.entity && entity!=="") || (this.filteringValue !== this.filteringValuePrevious)){
 			// time to retrive the actual results from the system.
 			this.entity=entity ;		
-			this.populateComboBox(entity,masterAttribute,masterfilterID)	
+			this.populateComboBox(entity,masterAttribute,masterfilterID);
+			this.filteringValuePrevious = this.filteringValue;
 		}	
 	}
 
