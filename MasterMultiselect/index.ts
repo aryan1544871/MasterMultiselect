@@ -76,17 +76,6 @@ export class MasterMultiselect implements ComponentFramework.StandardControl<IIn
 			"masterEntityPluralName" : context.parameters.EntityName.raw,
 			"dropdownColumnNameOfMasterEnitity" : context.parameters.AttributeName.raw
 		};
-		const pcfValue = {
-			targetEntityPluralName : context.parameters.TargetEntityName.raw,
-			intermediateEntityPluralName : context.parameters.IntEntityPluralName.raw,
-			intermediateEntitySingularName : context.parameters.IntEntitySingularName.raw,
-			lookupColumnNameOfTargetEntityOnIntermediateEntity : context.parameters.LookupColNameOfTargetEntityOnIntEntity.raw,
-			lookupColumnNameOfMasterEntityOnIntermediateEntity : context.parameters.LookupColNameOfMasterEntityOnIntEntity.raw,
-			masterEntitySingularName : context.parameters.EntitySingularName.raw,
-			masterEntityPluralName : context.parameters.EntityName.raw,
-			dropdownColumnNameOfMasterEnitity : context.parameters.AttributeName.raw
-		};
-		sessionStorage.setItem('pcfValues_'+ context.parameters.Attribute.attributes?.LogicalName,JSON.stringify(pcfValue));
 	}
 
 
