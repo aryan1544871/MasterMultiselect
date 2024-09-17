@@ -3,6 +3,9 @@ import { threadId } from "worker_threads";
 interface IMultipleOption{
 	key:string, text:string, checked:boolean
 }
+interface IPCFValues {
+	[key:string]:any;
+}
 export class MasterMultiselect implements ComponentFramework.StandardControl<IInputs, IOutputs> {
 	/**
 	 * 
@@ -12,6 +15,7 @@ export class MasterMultiselect implements ComponentFramework.StandardControl<IIn
 	{
 
 	}
+	pcfValues : IPCFValues ;
 	private notifyOutputChanged: () => void;
 	private currentValue: string | undefined;
 	private dropdownDiv:HTMLDivElement;
@@ -62,6 +66,16 @@ export class MasterMultiselect implements ComponentFramework.StandardControl<IIn
 		if(isPropertyLoading){
 			window.location.reload();
 		}
+		this.pcfValues = {
+			"targetEntityPluralName" : context.parameters.TargetEntityName.raw,
+			"intermediateEntityPluralName" : context.parameters.IntEntityPluralName.raw,
+			"intermediateEntitySingularName" : context.parameters.IntEntitySingularName.raw,
+			"lookupColumnNameOfTargetEntityOnIntermediateEntity" : context.parameters.LookupColNameOfTargetEntityOnIntEntity.raw,
+			"lookupColumnNameOfMasterEntityOnIntermediateEntity" : context.parameters.LookupColNameOfMasterEntityOnIntEntity.raw,
+			"masterEntitySingularName" : context.parameters.EntitySingularName.raw,
+			"masterEntityPluralName" : context.parameters.EntityName.raw,
+			"dropdownColumnNameOfMasterEnitity" : context.parameters.AttributeName.raw
+		};
 		const pcfValue = {
 			targetEntityPluralName : context.parameters.TargetEntityName.raw,
 			intermediateEntityPluralName : context.parameters.IntEntityPluralName.raw,
@@ -107,7 +121,8 @@ export class MasterMultiselect implements ComponentFramework.StandardControl<IIn
 	public getOutputs(): IOutputs
 	{	
 		return {
-			Attribute:this.currentValue
+			Attribute:this.currentValue,
+			pcfValues : JSON.stringify(this.pcfValues)
 		}
 	}
 

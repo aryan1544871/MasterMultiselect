@@ -10,7 +10,7 @@
   <property name="IntEntitySingularName" display-name-key="Intermediate Entity Singular Name" description-key="The singular logical name of the Intermedidate Entity " of-type="SingleLine.Text" usage="input" required="true" /> 
   <property name="LookupColNameOfTargetEntityOnIntEntity" display-name-key="Lookup Attribute Name Of Target Entity On Intermediate Entity " description-key="The lookup attribute logical name of the target entity on Intermedidate Entity " of-type="SingleLine.Text" usage="input" required="true" />
   <property name="LookupColNameOfMasterEntityOnIntEntity" display-name-key="Lookup Attribute Name Of Master Entity On Intermediate Entity " description-key="The lookup attribute logical name of the master entity on Intermedidate Entity " of-type="SingleLine.Text" usage="input" required="true" />  
-  
+  <property name="pcfValues" display-name-key="Lookup Attribute Name Of Master Entity On Intermediate Entity " description-key="The lookup attribute logical name of the master entity on Intermedidate Entity " of-type="SingleLine.Text" usage="output" required="true" />  
     <resources>
       <code path="index.ts" order="1"/>
       <css path="css/MasterMultiselect.css" order="1" />
