@@ -68,7 +68,6 @@ export class MasterMultiselect implements ComponentFramework.StandardControl<IIn
 		}
 		this.pcfValues = {
 			"targetEntityPluralName" : context.parameters.TargetEntityName.raw,
-			"intermediateEntityPluralName" : context.parameters.IntEntityPluralName.raw,
 			"intermediateEntitySingularName" : context.parameters.IntEntitySingularName.raw,
 			"lookupColumnNameOfTargetEntityOnIntermediateEntity" : context.parameters.LookupColNameOfTargetEntityOnIntEntity.raw,
 			"lookupColumnNameOfMasterEntityOnIntermediateEntity" : context.parameters.LookupColNameOfMasterEntityOnIntEntity.raw,
