@@ -160,7 +160,20 @@ export class MasterMultiselect implements ComponentFramework.StandardControl<IIn
 
 	private onSelectEnter(div:HTMLDivElement){
 		if (!this.context.mode.isControlDisabled){
-			div.className="hdnOptionSelected";
+			var result:boolean=false;
+			var elements=div.getElementsByTagName("input");
+			if (elements.length>0){
+				var c=<HTMLInputElement>elements[0];
+				if (typeof(c)!=="undefined" && c.checked){
+					result=true;
+					div.className="hdnOptionSelected";
+
+				}
+
+			}
+			if (!result){
+				div.className="hdnOptionSelectedHover";
+			}
 		}
 	}
 
@@ -172,6 +185,8 @@ export class MasterMultiselect implements ComponentFramework.StandardControl<IIn
 				var c=<HTMLInputElement>elements[0];
 				if (typeof(c)!=="undefined" && c.checked){
 					result=true;
+					div.className="hdnOptionSelected";
+
 				}
 
 			}
@@ -311,8 +326,8 @@ export class MasterMultiselect implements ComponentFramework.StandardControl<IIn
 				}
 				optionDiv.appendChild(select);
 				optionDiv.appendChild(span);
-				//optionDiv.addEventListener("mouseenter", this.onSelectEnter.bind(this, optionDiv));
-				//optionDiv.addEventListener("mouseleave", this.onSelectLeave.bind(this,optionDiv));
+				optionDiv.addEventListener("mouseenter", this.onSelectEnter.bind(this, optionDiv));
+				optionDiv.addEventListener("mouseleave", this.onSelectLeave.bind(this,optionDiv));
 				optionDiv.addEventListener("click",this.onSelectClick.bind(this,optionDiv));
 				this.selectContainer.appendChild(optionDiv);
 				

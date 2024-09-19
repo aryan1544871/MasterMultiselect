@@ -140,6 +140,29 @@ overflow-y:auto;
 
 }
 
+.hdnOptionSelectedHover::before{
+  font-family: "CRM MDL2";
+  font-size: 1.0rem;
+  display: inline-block;
+  content: "\E739";
+  margin-top: 1px;
+  margin-bottom: 1px;
+  margin-right: 12px;
+  margin-left: 5px;
+  background-color: #bcbcbc; 
+  }
+
+.hdnOptionSelectedHover{
+   font-size: 1.0rem;
+  font-weight:400;
+  color:#000000;
+  font-family: 'SegoeUI', 'Segoe UI';
+  background-color: #e6e6e6;
+  margin-top: 1px;
+  margin-bottom: 1px;
+
+}
+
 .hdnCheckbox{
   position: absolute !important;
   clip: rect (1px,1px,1px,1px);
